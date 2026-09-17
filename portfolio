@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhiadin Said Hassan — AI Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0F1210;
+    --bg-raised: #161A17;
+    --line: #2A2F2B;
+    --ink: #EDEFEA;
+    --ink-dim: #A7ACA4;
+    --ink-faint: #6E736C;
+    --signal: #4FE6C0;
+    --signal-dim: #2C7C68;
+    --amber: #E6B34F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection{ background: var(--signal); color: #0F1210; }
+  a{ color: inherit; text-decoration: none; }
+  .wrap{ max-width: 860px; margin: 0 auto; padding: 0 32px; }
+  .mono{ font-family: 'JetBrains Mono', monospace; }
+  h1,h2,h3{ font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; }
+
+  /* ---- nav ---- */
+  header{
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(15,18,16,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  header .wrap{ display:flex; align-items:center; justify-content:space-between; height: 64px; }
+  .brand{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size: 16px; }
+  .brand span{ color: var(--signal); }
+  nav ul{ list-style:none; display:flex; gap: 28px; }
+  nav a{ font-size: 14px; color: var(--ink-dim); transition: color .15s; }
+  nav a:hover{ color: var(--ink); }
+
+  /* ---- hero ---- */
+  .hero{ padding: 96px 0 72px; border-bottom: 1px solid var(--line); }
+  .status-line{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size: 13px; color: var(--signal); margin-bottom: 28px;
+  }
+  .dot{ width:7px; height:7px; border-radius:50%; background: var(--signal); }
+  .hero h1{ font-size: 46px; line-height: 1.15; max-width: 620px; }
+  .hero .role{ font-size: 20px; color: var(--ink-dim); margin-top: 14px; font-family: 'Space Grotesk', sans-serif; font-weight: 400; }
+  .hero p.lede{ margin-top: 22px; max-width: 560px; color: var(--ink-dim); font-size: 16px; }
+  .hero-links{ display:flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+  .btn{
+    padding: 10px 18px; border: 1px solid var(--line); border-radius: 6px;
+    font-size: 14px; color: var(--ink); transition: border-color .15s, color .15s;
+  }
+  .btn:hover{ border-color: var(--signal); color: var(--signal); }
+  .btn.primary{ background: var(--signal); color: #0F1210; border-color: var(--signal); font-weight: 500; }
+  .btn.primary:hover{ opacity: .88; color: #0F1210; }
+
+  /* ---- section shell ---- */
+  section{ padding: 72px 0; border-bottom: 1px solid var(--line); }
+  .eyebrow{ font-family:'JetBrains Mono',monospace; font-size: 13px; color: var(--signal-dim); margin-bottom: 8px; }
+  .sec-title{ font-size: 26px; margin-bottom: 36px; }
+
+  /* ---- about ---- */
+  .about-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap: 48px; }
+  .about-grid p{ color: var(--ink-dim); font-size: 15.5px; margin-bottom: 14px; max-width: 480px; }
+  .fact-list{ border-left: 1px solid var(--line); padding-left: 22px; }
+  .fact{ margin-bottom: 20px; }
+  .fact .k{ font-size: 12px; color: var(--ink-faint); font-family:'JetBrains Mono',monospace; text-transform: lowercase; }
+  .fact .v{ font-size: 15px; margin-top: 3px; }
+
+  /* ---- projects ---- */
+  .project{
+    border: 1px solid var(--line); border-radius: 10px; padding: 26px 28px;
+    margin-bottom: 16px; background: var(--bg-raised);
+    transition: border-color .15s;
+  }
+  .project:hover{ border-color: var(--signal-dim); }
+  .project-top{ display:flex; align-items:flex-start; justify-content:space-between; gap: 20px; }
+  .project h3{ font-size: 18px; }
+  .project-lang{ font-family:'JetBrains Mono',monospace; font-size: 12px; color: var(--ink-faint); white-space: nowrap; margin-top: 4px; }
+  .project p{ color: var(--ink-dim); font-size: 14.5px; margin: 10px 0 14px; max-width: 560px; }
+  .project-link{ font-size: 13px; color: var(--signal); font-family:'JetBrains Mono',monospace; }
+  .project-link:hover{ text-decoration: underline; }
+  .featured-tag{
+    font-size: 11px; font-family:'JetBrains Mono',monospace; color: var(--amber);
+    border: 1px solid var(--amber); border-radius: 4px; padding: 2px 8px; white-space: nowrap;
+  }
+
+  /* ---- skills ---- */
+  .skill-cols{ display:grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+  .skill-col h4{ font-family:'JetBrains Mono',monospace; font-size: 13px; color: var(--ink-faint); font-weight:400; margin-bottom: 14px; }
+  .skill-col ul{ list-style:none; }
+  .skill-col li{ font-size: 14.5px; padding: 6px 0; border-bottom: 1px solid var(--line); color: var(--ink-dim); }
+  .skill-col li:last-child{ border-bottom: none; }
+
+  /* ---- education / work ---- */
+  .timeline-item{ display:grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .timeline-item:last-child{ border-bottom: none; }
+  .timeline-item .when{ font-family:'JetBrains Mono',monospace; font-size: 13px; color: var(--signal-dim); }
+  .timeline-item h3{ font-size: 16.5px; }
+  .timeline-item .org{ color: var(--ink-dim); font-size: 14px; margin-top: 2px; }
+  .timeline-item p{ color: var(--ink-dim); font-size: 14px; margin-top: 8px; max-width: 520px; }
+
+  /* ---- contact ---- */
+  .contact{ border-bottom: none; padding-bottom: 96px; }
+  .contact-grid{ display:flex; gap: 16px; flex-wrap: wrap; margin-top: 28px; }
+  .contact-card{
+    flex: 1; min-width: 200px; border: 1px solid var(--line); border-radius: 8px;
+    padding: 18px 20px; background: var(--bg-raised); transition: border-color .15s;
+  }
+  .contact-card:hover{ border-color: var(--signal-dim); }
+  .contact-card .k{ font-size: 12px; color: var(--ink-faint); font-family:'JetBrains Mono',monospace; }
+  .contact-card .v{ font-size: 15px; margin-top: 6px; }
+
+  footer{ padding: 28px 0; }
+  footer .wrap{ display:flex; justify-content: space-between; font-size: 13px; color: var(--ink-faint); }
+
+  @media (max-width: 720px){
+    .hero h1{ font-size: 32px; }
+    .about-grid, .skill-cols{ grid-template-columns: 1fr; }
+    .timeline-item{ grid-template-columns: 1fr; }
+    nav ul{ gap: 16px; }
+    nav a{ font-size: 13px; }
+  }
+
+  @keyframes riseIn{ from{ opacity:0; transform: translateY(10px);} to{ opacity:1; transform:none; } }
+  .hero > *{ animation: riseIn .6s ease both; }
+  .hero .status-line{ animation-delay: 0s; }
+  .hero h1{ animation-delay: .07s; }
+  .hero .role{ animation-delay: .14s; }
+  .hero p.lede{ animation-delay: .21s; }
+  .hero-links{ animation-delay: .28s; }
+  @media (prefers-reduced-motion: reduce){ .hero > *{ animation: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">muhiadin<span>.</span>dev</div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="status-line"><span class="dot"></span><span class="mono">available for AI / full-stack work</span></div>
+    <h1>Muhiadin Said Hassan</h1>
+    <div class="role">AI Software Engineer &amp; Machine Learning Engineer</div>
+    <p class="lede">I build predictive models and full-stack applications that hold up in production — from churn prediction and fraud detection systems to the APIs and interfaces around them. Based in Mogadishu, Somalia.</p>
+    <div class="hero-links">
+      <a class="btn primary" href="#projects">View projects</a>
+      <a class="btn" href="https://github.com/MUHIYADIN2025">GitHub ↗</a>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">01 — about</div>
+    <h2 class="sec-title">Grounded in both ends of the stack</h2>
+    <div class="about-grid">
+      <div>
+        <p>I work across machine learning and full-stack development — training and evaluating predictive models with Python and scikit-learn, then wiring them into real applications with React, Node.js, Flask, and FastAPI.</p>
+        <p>Most of my recent practice has been project-driven: a 30-day challenge covering thirty distinct ML projects, a customer segmentation and churn-prediction capstone, and full-stack systems like a vehicle tax verification platform, an e-commerce fraud-detection engine, and a debt-collection mobile app.</p>
+        <p>I care about writing code that's clean and maintainable rather than just working — and about understanding a model's behavior well enough to explain it, not just ship it.</p>
+      </div>
+      <div class="fact-list">
+        <div class="fact"><div class="k">location</div><div class="v">Mogadishu, Somalia</div></div>
+        <div class="fact"><div class="k">focus</div><div class="v">AI / ML engineering, full-stack development</div></div>
+        <div class="fact"><div class="k">stack</div><div class="v">Python, React, Node.js, Flask, FastAPI</div></div>
+        <div class="fact"><div class="k">currently</div><div class="v">BS Computer Science, Somali International University</div></div>
+        <div class="fact"><div class="k">github</div><div class="v">13+ repos · 100+ followers · Pull Shark achievement</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">02 — projects</div>
+    <h2 class="sec-title">Selected work</h2>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>LoanIQ</h3>
+          <div class="project-lang">python</div>
+        </div>
+        <span class="featured-tag">pinned</span>
+      </div>
+      <p>A full-stack machine learning system for loan intelligence — combining a trained model with an application layer for prediction and decisioning.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/loaniq">github.com/MUHIYADIN2025/loaniq ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Customer segmentation &amp; churn prediction</h3>
+          <div class="project-lang">javascript</div>
+        </div>
+      </div>
+      <p>Capstone project for a machine learning bootcamp: segments customers and predicts churn risk to support retention decisions.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/churn-segmentation-project">github.com/MUHIYADIN2025/churn-segmentation-project ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Fraud detection</h3>
+          <div class="project-lang">jupyter notebook</div>
+        </div>
+      </div>
+      <p>A model for identifying fraudulent transactions, built and evaluated in notebook form for reproducibility and iteration.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/froud_detection">github.com/MUHIYADIN2025/froud_detection ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Full-stack vehicle tax verification</h3>
+          <div class="project-lang">typescript</div>
+        </div>
+      </div>
+      <p>An end-to-end application for verifying vehicle tax status, covering both the interface and the underlying service layer.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/full-stack-vehicle-tax-verification">github.com/MUHIYADIN2025/full-stack-vehicle-tax-verification ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>DebtTrack</h3>
+          <div class="project-lang">dart</div>
+        </div>
+      </div>
+      <p>An application for tracking debt and repayment, built as a standalone mobile-first tool.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/Debttrack">github.com/MUHIYADIN2025/Debttrack ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Somalia food price prediction</h3>
+          <div class="project-lang">python</div>
+        </div>
+      </div>
+      <p>A predictive model for food prices in Somalia, applying time-series and regression techniques to local market data.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/Somalia-Food-Price-Prediction">github.com/MUHIYADIN2025/Somalia-Food-Price-Prediction ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>30 days, 30 machine learning projects</h3>
+          <div class="project-lang">jupyter notebook</div>
+        </div>
+        <span class="featured-tag">pinned</span>
+      </div>
+      <p>A self-directed challenge building one distinct ML project per day for thirty days, spanning classification, regression, clustering, and NLP.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/-30-Days-30-Machine-Learning-Projects-Challenges">github.com/MUHIYADIN2025/-30-Days-30-Machine-Learning-Projects-Challenges ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Faroudant — e-commerce fraud detection</h3>
+          <div class="project-lang">full stack</div>
+        </div>
+      </div>
+      <p>A full-stack e-commerce transaction platform with a live fraud-scoring engine, transaction ledger, and monitoring dashboard.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025">github.com/MUHIYADIN2025 ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Debt collection mobile app</h3>
+          <div class="project-lang">flutter</div>
+        </div>
+      </div>
+      <p>A mobile application for small businesses to manage debt collection, built with Flutter on the front end and Node/Express with MongoDB on the back end.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025">github.com/MUHIYADIN2025 ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Model Testing Arena</h3>
+          <div class="project-lang">python</div>
+        </div>
+      </div>
+      <p>A workspace for testing and comparing machine learning models side by side.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/model-testing-arena">github.com/MUHIYADIN2025/model-testing-arena ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Bike Sharing Forecaster</h3>
+          <div class="project-lang">python</div>
+        </div>
+      </div>
+      <p>A forecasting model for bike-sharing demand, applying time-series and regression techniques.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/bike-sharing-forecaster">github.com/MUHIYADIN2025/bike-sharing-forecaster ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Lecture Companion</h3>
+          <div class="project-lang">ai / nlp</div>
+        </div>
+      </div>
+      <p>An AI-assisted tool for helping students engage with and review lecture content.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/lecture-companion">github.com/MUHIYADIN2025/lecture-companion ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Accessibility Auditor</h3>
+          <div class="project-lang">web</div>
+        </div>
+      </div>
+      <p>A tool for auditing websites against accessibility standards and surfacing issues to fix.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/accessibility-auditor">github.com/MUHIYADIN2025/accessibility-auditor ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Campus Knowledge Assistant</h3>
+          <div class="project-lang">ai / nlp</div>
+        </div>
+      </div>
+      <p>An AI assistant designed to answer campus and university-related questions for students.</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/campus-knowledge-assistant">github.com/MUHIYADIN2025/campus-knowledge-assistant ↗</a>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <div>
+          <h3>Build AI Agent — Google ADK</h3>
+          <div class="project-lang">python</div>
+        </div>
+      </div>
+      <p>An AI agent built using Google's Agent Development Kit (ADK).</p>
+      <a class="project-link" href="https://github.com/MUHIYADIN2025/build-ai-agent-google-adk">github.com/MUHIYADIN2025/build-ai-agent-google-adk ↗</a>
+    </div>
+
+  </div>
+</section>
+  <div class="wrap">
+    <div class="eyebrow">03 — skills</div>
+    <h2 class="sec-title">Technologies I work with</h2>
+    <div class="skill-cols">
+      <div class="skill-col">
+        <h4>languages</h4>
+        <ul>
+          <li>Python</li>
+          <li>JavaScript / TypeScript</li>
+          <li>SQL</li>
+          <li>Dart</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h4>ml &amp; data</h4>
+        <ul>
+          <li>scikit-learn</li>
+          <li>Pandas / NumPy</li>
+          <li>Jupyter</li>
+          <li>Predictive modeling</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h4>full stack</h4>
+        <ul>
+          <li>React</li>
+          <li>Node.js / Express</li>
+          <li>Flask / FastAPI</li>
+          <li>MongoDB / SQL</li>
+          <li>Flutter</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="eyebrow">04 — education &amp; experience</div>
+    <h2 class="sec-title">Background</h2>
+
+    <div class="timeline-item">
+      <div class="when">2022 — present</div>
+      <div>
+        <h3>BS, Computer Science</h3>
+        <div class="org">Somali International University</div>
+        <p>51 courses across 8 semesters, CGPA 3.71/4.0. Strongest coursework in operating systems, networks, and programming; graduation project received an A+.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="when">current</div>
+      <div>
+        <h3>Warehouse, security &amp; graphic design</h3>
+        <div class="org">United Som Trading Company</div>
+        <p>Combined operational and creative role: warehouse oversight, security duties, and brand and marketing design work for the company.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="eyebrow">05 — contact</div>
+    <h2 class="sec-title">Let's work together</h2>
+    <p style="color:var(--ink-dim); max-width:520px; font-size:15.5px;">Open to AI/ML engineering roles, full-stack projects, and collaborations. Reach out through any of the channels below.</p>
+    <div class="contact-grid">
+      <a class="contact-card" href="https://github.com/MUHIYADIN2025">
+        <div class="k">github</div>
+        <div class="v">MUHIYADIN2025</div>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/muhiadin-hassan-44a284371">
+        <div class="k">linkedin</div>
+        <div class="v">muhiadin-hassan</div>
+      </a>
+      <a class="contact-card" href="https://www.facebook.com/share/198EdYGjc6/">
+        <div class="k">facebook</div>
+        <div class="v">Muhiadin Said Hassan</div>
+      </a>
+      <a class="contact-card" href="https://tiktok.com/@muhiadin8448">
+        <div class="k">tiktok</div>
+        <div class="v">@muhiadin8448</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Muhiadin Said Hassan</span>
+    <span class="mono">Mogadishu, Somalia</span>
+  </div>
+</footer>
+
+</body>
+</html>
